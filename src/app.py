@@ -10,9 +10,8 @@ app = Flask(__name__)
 app.debug = debug_mode
 
 ssd_detector = SSDDetector()
-tmp_path = '../tmp'
-image_path = '../tmp/image.png'
 
+tmp_path = '../tmp'
 if not os.path.exists(tmp_path):
     os.makedirs(tmp_path)
 
@@ -22,9 +21,9 @@ def process():
     if 'image' in request.files:
         file = request.files['image']
         img = Image.open(file.stream)
-        img.save(image_path)
+        img.save(tmp_path + '/image.png')
 
-        inputs = ssd_detector.prepare_inputs([image_path])
+        inputs = ssd_detector.prepare_inputs([tmp_path + '/image.png'])
         tensors = prepare_tensor(inputs)
         detections = ssd_detector.detect(tensors)
 
