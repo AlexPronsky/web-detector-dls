@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.debug = debug_mode
 
 ssd_detector = SSDDetector()
-image_path = '../tmp/image.png'
+image_path = 'tmp/image.png'
 
 
 @app.route('/', methods=('GET', 'POST'))
