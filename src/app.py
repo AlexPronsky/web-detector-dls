@@ -1,3 +1,4 @@
+import os
 import base64
 from flask import Flask, render_template, request
 from PIL import Image
@@ -9,7 +10,11 @@ app = Flask(__name__)
 app.debug = debug_mode
 
 ssd_detector = SSDDetector()
-image_path = 'tmp/image.png'
+tmp_path = '../tmp'
+image_path = '../tmp/image.png'
+
+if not os.path.exists(tmp_path):
+    os.makedirs(tmp_path)
 
 
 @app.route('/', methods=('GET', 'POST'))
